@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscribe</title>
+    <style>
+        /* Center the form on the page with a clean look */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #004C3F; /* PayFast's dark green */
+        }
+
+        .container {
+            text-align: center;
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 20px; /* Rounded corners */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional shadow */
+        }
+
+        /* Button customization */
+        input[type="image"] {
+            display: block;
+            margin: 20px auto;
+        }
+
+        /* "Thanks" text styling */
+        #thankYouMessage {
+            font-size: 36px;
+            margin-bottom: 20px;
+            font-family: 'Impact', sans-serif; /* Impact font */
+            color: #000000;
+        }
+
+        /* Label and input for chosen amount */
+        label[for="PayFastAmount"] {
+            font-family: 'Impact', sans-serif;
+            color: #000000;
+            font-size: 24px;
+        }
+
+        #PayFastAmount {
+            font-family: 'Impact', sans-serif;
+            font-size: 20px;
+            margin-bottom: 20px;
+            padding: 5px;
+        }
+    </style>
+
+    <script type="text/javascript">
+        function actionPayFastJavascript(formReference) {
+            let chosenAmount = formReference['amount'].value;
+            return true; // Simply submit the form with the chosen amount
+        }
+    </script>
+</head>
+<body>
+
+<div class="container">
+    <form onsubmit="return actionPayFastJavascript(this);" name="PayFastPayNowForm" action="https://payment.payfast.io/eng/process" method="post">
+        <input required type="hidden" name="cmd" value="_paynow">
+        <input required type="hidden" name="receiver" value="25318713">
+        <input type="hidden" name="return_url" value="https://neuronuggets.substack.com/">
+        <input type="hidden" name="cancel_url" value="https://neuronuggets.substack.com/">
+
+        <!-- Thank You Message -->
+        <p id="thankYouMessage">Thanks!</p>
+
+        <!-- Input for Chosen Support Amount -->
+        <label id="PayFastAmountLabel" for="PayFastAmount">Chosen Support Amount:</label>
+        <input required id="PayFastAmount" type="number" step=".01" name="amount" min="5.00" placeholder="5.00" value="50">
+
+        <input required type="hidden" name="item_name" value="Neuro Nuggets Subscription">
+        <input required type="hidden" name="subscription_type" value="1">
+        <input required type="hidden" name="cycles" value="0">
+        <input required type="hidden" name="frequency" value="3">
+
+        <!-- Subscribe button -->
+        <input type="image" src="https://my.payfast.io/images/buttons/Subscribe/Light-Large-Subscribe.png" alt="Subscribe" title="Subscribe with Payfast">
+    </form>
+</div>
+
+</body>
+</html>
